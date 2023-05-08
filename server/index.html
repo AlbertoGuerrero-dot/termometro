@@ -11,6 +11,8 @@
 <body>
     <h1>Termometro con Node-Arduino</h1>
 
+    <p id="temperatura"></p>
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
@@ -19,6 +21,7 @@
             console.log('Socket connected');
             socket.on('arduino:data', function (serialData) {
                 console.log(serialData);
+                document.getElementById('temperatura').textContent = serialData.value;
             });
         });
 
