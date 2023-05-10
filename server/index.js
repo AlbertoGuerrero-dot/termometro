@@ -2,7 +2,7 @@ const SerialPort = require('serialport').SerialPort;
 const { DelimiterParser } = require('@serialport/parser-delimiter');
 
 const puerto = new SerialPort({
-    path: 'COM4',
+    path: 'COM5',
     baudRate: 9600,
     dataBits: 8,
     parity: 'none',
