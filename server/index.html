@@ -15,13 +15,15 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
+        let temperatura = 0;
         const socket = io();
 
         socket.on('connect', function () {
             console.log('Socket connected');
             socket.on('arduino:data', function (serialData) {
-                console.log(serialData);
-                document.getElementById('temperatura').textContent = serialData.value;
+                //console.log(serialData);
+                temperatura = serialData.value;
+                document.getElementById('temperatura').textContent = temperatura;
             });
         });
 
