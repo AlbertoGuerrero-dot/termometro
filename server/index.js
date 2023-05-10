@@ -32,14 +32,10 @@ parser.on('data', function(data){
     var enc = new TextDecoder();
     var arr = new Uint8Array(data);
     var ready = enc.decode(arr);
-    console.log(ready);
+    //console.log(ready);
     io.emit('arduino:data', {
         value: ready
     });
-    //var temperatura = ready.match(/\d+/);
-    // Actualiza la etiqueta h6 con la temperatura
-    //var temperaturaElem = document.getElementById('temperatura');
-    //temperaturaElem.textContent = "Temperatura: " + temperatura + " grados Celsius";
 });
 
 puerto.on('error', function(err){
