@@ -25,7 +25,7 @@ const puerto = new SerialPort({
 const parser = puerto.pipe(new DelimiterParser({ delimiter: '\n'}))
 
 parser.on('open', function(){
-    console.log('Conexion abierta');
+    console.log('Conexión abierta');
 });
 
 parser.on('data', function(data){
