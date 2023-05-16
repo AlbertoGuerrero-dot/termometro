@@ -1,3 +1,4 @@
+let tempFinal;
 const express = require('express');
 const socketIo = require('socket.io');
 const http = require('http');
@@ -33,10 +34,31 @@ parser.on('data', function(data){
     var arr = new Uint8Array(data);
     var ready = enc.decode(arr);
     //console.log(ready);
-    io.emit('arduino:data', {
+    /*io.emit('arduino:data', {
         value: ready
-    });
+    });*/
+    tempFinal = ready;
+    enviarTemperatua();
 });
+
+const enviarTemperatua = async () => {
+    const envioTemp = {
+        "temperature" : tempFinal 
+    }
+    const lambdaEndpoint = "https://x230vnbpw4.execute-api.us-east-2.amazonaws.com/test/arduino-termometro";
+    fetch(lambdaEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(envioTemp)
+    })
+    .then(response => response.json())
+    .then(data => {console.log(data);
+        //console.log( data.message)
+    })
+    .catch(error => console.error(error));
+
+}
+
 
 puerto.on('error', function(err){
     console.log(err);
