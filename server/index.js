@@ -45,6 +45,7 @@ const enviarTemperatua = async () => {
     const envioTemp = {
         "temperature" : tempFinal 
     }
+    
     const lambdaEndpoint = "https://x230vnbpw4.execute-api.us-east-2.amazonaws.com/test/arduino-termometro";
     fetch(lambdaEndpoint, {
         method: 'POST',
@@ -52,9 +53,13 @@ const enviarTemperatua = async () => {
         body: JSON.stringify(envioTemp)
     })
     .then(response => response.json())
-    .then(data => {console.log(data);
-        //console.log( data.message)
-    })
+    .then(data => {
+    console.log(data);
+    
+    for (let key in data) {
+        console.log(`Propiedad: ${key}, Valor: ${data[key]}`);
+    }
+})
     .catch(error => console.error(error));
 
 }
